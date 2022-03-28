@@ -1,10 +1,12 @@
 # This is a sample Python script.
+import json
+import os
 import time
 from datetime import datetime
+
 import requests
 from bs4 import BeautifulSoup
-import os
-import json
+
 
 def read_secrets() -> dict:
     filename = os.path.join('secrets.json')
@@ -34,11 +36,10 @@ def parsePage(page):
     return int(count[0])
 
 
-def write_db(timestamp,count):
-    url = 'https://api.mg-orbit.space/mailmanWatch/setSchwimmkursCount.php'
+def write_db(timestamp, count, apiURL):
     ts = datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d')
     myobj = {'date': ts, 'word_count': count}
-    x = requests.post(url, data=myobj)
+    x = requests.post(apiURL, data=myobj)
     print(x.text)
 
 
@@ -49,12 +50,13 @@ if __name__ == '__main__':
     page = readMailman(URL)
     count = parsePage(page)
     timestamp = int(time.time())
-    write_db(timestamp, count)
+    write_db(timestamp, count, secrets['apiURL'])
 
 # secrets.json required:
 #
 # {
 #     "adminURL": "",
-#     "adminPW": ""
+#     "adminPW": "",
+#     "apiURL": ""
 #
 # }
