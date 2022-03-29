@@ -20,14 +20,14 @@ def read_secrets() -> dict:
 
 def readMailman(URL):
     page = requests.get(URL)
-    print(page.content)
+    #print(page.content)
     return page.content
 
 
 def parsePage(page):
     bs = BeautifulSoup(page, 'html.parser')
     em = bs.find_all('em')
-    print(em[1])
+    #print(em[1])
     count = em[1]
     count = count.getText()
     count = count.split(' ')
@@ -40,7 +40,7 @@ def write_db(timestamp, count, apiURL):
     ts = datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d')
     myobj = {'date': ts, 'word_count': count}
     x = requests.post(apiURL, data=myobj)
-    print(x.text)
+    #print(x.text)
 
 
 # Press the green button in the gutter to run the script.
