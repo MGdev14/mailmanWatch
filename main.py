@@ -40,7 +40,7 @@ def write_db(timestamp, count, apiURL):
     ts = datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d')
     myobj = {'date': ts, 'word_count': count}
     x = requests.post(apiURL, data=myobj)
-    #print(x.text)
+    print(x.text)
 
 
 # Press the green button in the gutter to run the script.
