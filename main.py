@@ -39,6 +39,7 @@ def parsePage(page):
 def write_db(timestamp, count, apiURL):
     ts = datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d')
     myobj = {'date': ts, 'word_count': count}
+    print(myobj)
     x = requests.post(apiURL, data=myobj)
     print(x.text)
 
